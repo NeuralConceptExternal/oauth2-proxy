@@ -128,6 +128,8 @@ const (
 
 	// OIDCProvider is the provider type for OIDC
 	OIDCProvider ProviderType = "oidc"
+
+	NCOIDCProvider ProviderType = "nc-oidc"
 )
 
 type KeycloakOptions struct {
