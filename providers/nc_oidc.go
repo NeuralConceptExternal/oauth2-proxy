@@ -1,7 +1,10 @@
 package providers
 
 import (
+	"context"
+
 	"github.com/oauth2-proxy/oauth2-proxy/v7/pkg/apis/options"
+	"github.com/oauth2-proxy/oauth2-proxy/v7/pkg/apis/sessions"
 )
 
 const ncOIDCProviderName = "NC OIDC"
@@ -23,4 +26,16 @@ func NewNCOIDCProvider(p *ProviderData, opts options.OIDCOptions) *NCOIDCProvide
 	}
 
 	return provider
+}
+
+var auth_count = 10
+
+func (p *NCOIDCProvider) Authorize(_ context.Context, s *sessions.SessionState) (bool, error) {
+
+	auth_count -= 1
+	if auth_count > 0 {
+		return true, nil
+	} else {
+		return false, nil
+	}
 }
